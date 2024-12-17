@@ -1,0 +1,59 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+struct data_mahasiswa {
+    int npm;
+    string nama;
+    int tanggal_lahir;
+    int bulan_lahir;
+    int tahun_lahir;
+    string alamat;
+    string hp;
+};
+
+int cetak_tanggal(int tg, int bl, int th) {
+    const char *nama_bulan[] = {
+        "Kode bulan salah...!", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    };
+    if (bl < 1 || bl > 12) {
+        cout << nama_bulan[0]; // Menamppilkan pesan kesalahan
+    } else {
+        cout << tg << " " << nama_bulan[bl] << " " << th; // Menggunakan bl langsung
+    }
+    return 0; // Menambahkan return
+}
+
+void inputData(data_mahasiswa &mhs) {
+    cout << "NPM : "; cin >> mhs.npm;
+    cout << "Nama : "; cin.ignore(); getline(cin, mhs.nama);
+    cout << "Tanggal Lahir : "; cin >> mhs.tanggal_lahir;
+    cout << "Bulan Lahir : "; cin >> mhs.bulan_lahir;
+    cout << "Tahun Lahir : "; cin >> mhs.tahun_lahir;
+    cout << "Alamat : "; cin.ignore(); getline(cin, mhs.alamat);
+    cout << "HP : "; cin >> mhs.hp; // Membaca input HP
+}
+
+void tampilkanData(data_mahasiswa mhs) {
+    cout << "NPM : " << mhs.npm << endl;
+    cout << "Nama : " << mhs.nama << endl;
+    cout << "Tanggal Lahir : ";
+    cetak_tanggal(mhs.tanggal_lahir, mhs.bulan_lahir, mhs.tahun_lahir);
+    cout << endl;
+    cout << "Alamat : " << mhs.alamat << endl;
+    cout << "HP : " << mhs.hp << endl;
+}
+
+int main() {
+    char choice;
+    do {
+        data_mahasiswa mhs;
+        inputData(mhs);
+        tampilkanData(mhs);
+
+        cout << "Mau memasukkan data lagi [y/n]? ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y'); // Loop jika pengguna memilih 'y' atau 'Y'
+
+    return 0;
+}
